@@ -10,7 +10,8 @@ import (
 
 type User interface {
 	Auth(ctx context.Context, user *model.UserAuthDTO) error
-	GetUser(ctx context.Context, userid string) (*model.User, error)
+	GetUser(ctx context.Context, user string) (*model.User, error)
+	GetAllUsers(ctx context.Context) (*[]model.User, error)
 }
 
 type user struct {
@@ -34,7 +35,7 @@ func (u *user) Auth(ctx context.Context, user *model.UserAuthDTO) error {
 
 }
 
-func (u *user) GetUser(ctx context.Context, userid string) (*model.User, error) {
+func (u *user) GetUser(ctx context.Context, user string) (*model.User, error) {
 	return &model.User{
 		ID:       uuid.New(),
 		Login:    "test",
@@ -42,4 +43,8 @@ func (u *user) GetUser(ctx context.Context, userid string) (*model.User, error) 
 		Email:    "v@vendeta.ru",
 		IsAdmin:  false,
 	}, nil
+}
+
+func (u *user) GetAllUsers(ctx context.Context) (*[]model.User, error) {
+	return nil, nil
 }

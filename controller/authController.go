@@ -38,7 +38,7 @@ func (a *auth) Auth(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"auth": "true",
-		"data": time.Now(),
+		"isauth": "true",
+		"data":   time.Now(),
 	})
 }
