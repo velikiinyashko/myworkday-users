@@ -28,7 +28,7 @@ func (u *user) Auth(ctx context.Context, user *UserAuthDTO) (*string, error) {
 
 	if user.Login == testAuth.Login && user.Password == testAuth.Password {
 
-		token, _ := getJwtToken(user.Login, "1", "test")
+		token, _ := getJwtToken("", "", "")
 
 		return &token
 	}
