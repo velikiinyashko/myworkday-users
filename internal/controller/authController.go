@@ -2,12 +2,12 @@ package controller
 
 import (
 	"context"
+	"crypto/sha1"
 	"net/http"
 	"time"
 
 	"github.com/gin-gonic/gin"
-	"github.com/velikiinyashko/myworkday/model"
-	"github.com/velikiinyashko/myworkday/service"
+	"github.com/velikiinyashko/myworkday/internal/service/user"
 )
 
 type Auth interface {
@@ -24,9 +24,9 @@ func AuthService(ctx *gin.Context) Auth {
 
 func (a *auth) Auth(ctx *gin.Context) {
 
-	userSrv := service.UserService(context.Background())
+	userSrv := user.UserService(context.Background())
 
-	var login model.UserAuthDTO
+	var login user.UserAuthDTO
 	if err := ctx.BindJSON(&login); err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
@@ -38,7 +38,7 @@ func (a *auth) Auth(ctx *gin.Context) {
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"isauth": "true",
-		"data":   time.Now(),
+		"token": ,
+		"data":  time.Now(),
 	})
 }

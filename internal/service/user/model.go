@@ -1,8 +1,8 @@
-package model
+package user
 
 import "github.com/google/uuid"
 
-type User struct {
+type UserModel struct {
 	ID       uuid.UUID `json:"-" bson:"_id,omitempty"`
 	Login    string    `json:"login" bson:"login"`
 	Password string    `json:"-" bson:"password"`

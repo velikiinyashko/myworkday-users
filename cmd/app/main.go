@@ -2,7 +2,7 @@ package main
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/velikiinyashko/myworkday/controller"
+	"github.com/velikiinyashko/myworkday/internal/controller"
 )
 
 func main() {
