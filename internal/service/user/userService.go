@@ -5,6 +5,7 @@ import (
 	"errors"
 
 	"github.com/google/uuid"
+	"github.com/velikiinyashko/myworkday/pkg/authorized"
 )
 
 type User interface {
@@ -28,9 +29,9 @@ func (u *user) Auth(ctx context.Context, user *UserAuthDTO) (*string, error) {
 
 	if user.Login == testAuth.Login && user.Password == testAuth.Password {
 
-		token, _ := getJwtToken("", "", "")
+		token, _ := authorized.GetJwtToken(user.Login, "1", "test")
 
-		return &token
+		return token, nil
 	}
 
 	return nil, errors.New("логин или пароль не корректны")

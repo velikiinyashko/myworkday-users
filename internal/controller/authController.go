@@ -2,7 +2,6 @@ package controller
 
 import (
 	"context"
-	"crypto/sha1"
 	"net/http"
 	"time"
 
@@ -32,13 +31,14 @@ func (a *auth) Auth(ctx *gin.Context) {
 		return
 	}
 
-	if err := userSrv.Auth(context.Background(), &login); err != nil {
+	token, err := userSrv.Auth(context.Background(), &login)
+	if err != nil {
 		ctx.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
 	ctx.JSON(http.StatusOK, gin.H{
-		"token": ,
+		"token": token,
 		"data":  time.Now(),
 	})
 }

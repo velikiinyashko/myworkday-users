@@ -6,13 +6,17 @@ import (
 	"github.com/golang-jwt/jwt"
 )
 
-func getJwtToken(login, id, key string) (*string, error) {
-	token := jwt.NewWithClaims(jwt.SigningMethodES256, jwt.MapClaims{
-		"user":   login,
-		"userid": id,
+type Claims struct {
+	jwt.StandardClaims
+	User string `json:"user"`
+}
+
+func GetJwtToken(login, id, key string) (*string, error) {
+	token := jwt.NewWithClaims(jwt.SigningMethodHS256, &Claims{
+		StandardClaims: jwt.StandardClaims{}, User: login,
 	})
 
-	tokenStr, err := token.SignedString(key)
+	tokenStr, err := token.SignedString([]byte(key))
 
 	if err != nil {
 		log.Fatal(err)
