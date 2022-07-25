@@ -14,7 +14,8 @@ func main() {
 	v1 := r.Group("/v1")
 	{
 		v1.GET("/users", nil)
-		v1.POST("/users/auth", auth.Auth)
+		v1.POST("/singin", auth.SingIn)
+		v1.POST("/singup", auth.SingUp)
 	}
 
 	r.Run(":8080")

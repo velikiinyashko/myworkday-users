@@ -10,7 +10,8 @@ import (
 )
 
 type Auth interface {
-	Auth(ctx *gin.Context)
+	SingIn(ctx *gin.Context)
+	SingUp(ctx *gin.Context)
 }
 
 type auth struct {
@@ -21,7 +22,7 @@ func AuthService(ctx *gin.Context) Auth {
 	return &auth{ctx: ctx}
 }
 
-func (a *auth) Auth(ctx *gin.Context) {
+func (a *auth) SingIn(ctx *gin.Context) {
 
 	userSrv := user.UserService(context.Background())
 
@@ -40,5 +41,11 @@ func (a *auth) Auth(ctx *gin.Context) {
 	ctx.JSON(http.StatusOK, gin.H{
 		"token": token,
 		"data":  time.Now(),
+	})
+}
+
+func (a *auth) SingUp(ctx *gin.Context) {
+	ctx.JSON(http.StatusOK, gin.H{
+		"status": "user is create?",
 	})
 }
